@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
+import SmoothScroll from "@/components/ui/SmoothScroll";
 
 const aeonik = localFont({
   src: [
@@ -31,7 +32,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${aeonik.variable} h-full antialiased`}>
-      <body className="min-h-full flex flex-col">{children}</body>
+      <body className="min-h-full flex flex-col">
+        <SmoothScroll>{children}</SmoothScroll>
+      </body>
     </html>
   );
 }
