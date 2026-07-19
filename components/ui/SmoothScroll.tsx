@@ -16,8 +16,11 @@ export default function SmoothScroll({
       autoRaf: true,
     });
 
+    (window as unknown as { lenis?: Lenis }).lenis = lenis;
+
     return () => {
       lenis.destroy();
+      delete (window as unknown as { lenis?: Lenis }).lenis;
     };
   }, []);
 
