@@ -9,8 +9,6 @@ export default function Home() {
       <GlobalLeaders />
       <FeaturedProjects />
       <section className="min-h-screen bg-white"></section>
-      <section className="min-h-screen bg-white"></section>
-      <section className="min-h-screen bg-white"></section>
     </main>
   );
 }

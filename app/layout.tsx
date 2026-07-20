@@ -15,6 +15,11 @@ const aeonik = localFont({
       weight: "400",
       style: "normal",
     },
+    {
+      path: "/fonts/Aeonik-Light.ttf",
+      weight: "300",
+      style: "normal",
+    },
   ],
   variable: "--font-aeonik",
   display: "swap",
