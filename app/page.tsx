@@ -1,6 +1,8 @@
 import FeaturedProjects from "@/components/section/Homepage/FeaturedProjects";
 import GlobalLeaders from "@/components/section/Homepage/GlobalLeaders";
 import Hero from "@/components/section/Homepage/Hero";
+import ProvenGrowth from "@/components/section/Homepage/ProvenGrowth";
+import Services from "@/components/section/Homepage/Services";
 
 export default function Home() {
   return (
@@ -8,7 +10,8 @@ export default function Home() {
       <Hero />
       <GlobalLeaders />
       <FeaturedProjects />
-      <section className="min-h-screen bg-white"></section>
+      <ProvenGrowth />
+      <Services />
     </main>
   );
 }
