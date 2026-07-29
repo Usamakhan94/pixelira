@@ -3,6 +3,7 @@ import GlobalLeaders from "@/components/section/Homepage/GlobalLeaders";
 import Hero from "@/components/section/Homepage/Hero";
 import ProvenGrowth from "@/components/section/Homepage/ProvenGrowth";
 import Services from "@/components/section/Homepage/Services";
+import TestimonialsSection from "../components/section/Homepage/TestimonialsSection";
 
 export default function Home() {
   return (
@@ -12,6 +13,7 @@ export default function Home() {
       <FeaturedProjects />
       <ProvenGrowth />
       <Services />
+      <TestimonialsSection />
     </main>
   );
 }

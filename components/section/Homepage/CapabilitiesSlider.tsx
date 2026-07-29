@@ -3,9 +3,9 @@
 import { useEffect, useRef, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import type { Swiper as SwiperType } from "swiper/types";
+import "swiper/css";
 import type Lenis from "lenis";
 
-import "swiper/css";
 import Image from "next/image";
 import AnimatedButton from "@/components/ui/button/AnimatedButton";
 import AnimatedArrowIcon from "@/components/ui/button/AnimatedArrowIcon";
