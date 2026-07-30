@@ -15,17 +15,23 @@ const Hero = () => {
   const containerRef = useRef<HTMLDivElement>(null);
 
   useGSAP(() => {
-    gsap.to(logoRef.current, {
-      scrollTrigger: {
-        trigger: containerRef.current,
-        endTrigger: "#global-leaders",
-        start: "top top",
-        end: "bottom bottom",
-        pin: logoRef.current,
-        pinSpacing: false,
-        scrub: true,
-      },
+    const mm = gsap.matchMedia();
+
+    mm.add("(min-width: 1024px)", () => {
+      gsap.to(logoRef.current, {
+        scrollTrigger: {
+          trigger: containerRef.current,
+          endTrigger: "#global-leaders",
+          start: "top top",
+          end: "bottom bottom",
+          pin: logoRef.current,
+          pinSpacing: false,
+          scrub: true,
+        },
+      });
     });
+
+    return () => mm.revert();
   });
 
   return (
@@ -40,15 +46,15 @@ const Hero = () => {
         className="absolute inset-0 -z-10"
       />
       <div className="container">
-        <div className="grid grid-cols-3 items-center">
-          <h1 className="text-3xl font-regular">
+        <div className="grid lg:grid-cols-3 items-center">
+          <h1 className="lg:text-3xl text-2xl font-regular">
             Moving your brand forward, faster.
           </h1>
           <div ref={logoRef} className="flex justify-center items-center">
             <Image src="/logo.svg" alt="Logo" width={337} height={293} />
           </div>
-          <div className="flex flex-col gap-7.5 max-w-71 ml-auto">
-            <p>
+          <div className="flex flex-col lg:items-start items-center lg:gap-7.5 gap-3 lg:mt-0 mt-8 lg:max-w-71 lg:text-left text-center ml-auto">
+            <p className="text-body">
               Pixelira is a no-non sense growth agency delivering excellence to
               startups and medium-sized companies.
             </p>

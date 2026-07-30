@@ -162,7 +162,7 @@ const GlobalLeaders = () => {
 
           <div
             ref={logoRef}
-            className="flex justify-center items-center absolute inset-0 pointer-events-none"
+            className="lg:flex hidden justify-center items-center absolute inset-0 pointer-events-none"
           >
             <Image
               src="/white-logo.svg"

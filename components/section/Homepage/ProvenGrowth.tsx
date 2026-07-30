@@ -62,7 +62,7 @@ const ProvenGrowth = () => {
         </div>
         <div className=" p-10 bg-linear-to-t from-[#50338C] to-[#8B59F2] rounded-[24px] flex items-stretch gap-17.5 ">
           <div className="flex-1 flex flex-col justify-between">
-            <div className="flex items-center justify-center w-13 h-13 p-3.5 rounded-[16px] bg-white ">
+            <div className="flex items-center justify-center w-13 h-13 p-3.5 rounded-[16px] bg-white mb-24.75">
               <FaArrowTrendUp className="text-primary w-full h-full" />
             </div>
             <div>
@@ -81,7 +81,7 @@ const ProvenGrowth = () => {
               </AnimatedButton>
             </div>
           </div>
-          <div className="rounded-[10px] overflow-hidden">
+          <div className="rounded-[10px] overflow-hidden min-w-88.75">
             <Image
               className="w-full h-full object-cover"
               src={"/make-call.gif"}

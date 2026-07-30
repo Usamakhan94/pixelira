@@ -199,10 +199,19 @@
   top: 0;
   bottom: 0;
   height: 100%;
-  width: 52rem;
   right: 0;
   /* pointer-events: none; */
 }
 .testimonials-swiper {
   right: 0;
+}
+@media (min-width: 1024px) {
+  .testimonials-swiper {
+    width: 48rem;
+  }
+}
+@media (min-width: 1200px) {
+  .testimonials-swiper {
+    width: 52rem;
+  }
 }
