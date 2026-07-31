@@ -37,83 +37,92 @@ const GlobalLeaders = () => {
 
   useGSAP(
     () => {
-      gsap.fromTo(
-        logoRef.current,
-        { yPercent: -100 },
-        {
-          yPercent: 0,
-          ease: "none",
-          scrollTrigger: {
-            trigger: "#hero-section",
-            endTrigger: containerRef.current,
-            start: "top top",
-            end: "bottom bottom",
-            scrub: true,
-          },
-        },
-      );
+      const mm = gsap.matchMedia();
+      mm.add({ isDesktop: "(min-width: 1024px)" }, (context) => {
+        const { isDesktop } = context.conditions as { isDesktop: boolean };
+        console.log("isDesktop", isDesktop.toString());
 
-      const tl = gsap.timeline({
-        scrollTrigger: {
-          trigger: containerRef.current,
-          start: "top top",
-          end: "+=150%",
-          pin: true,
-          scrub: true,
-          anticipatePin: 1,
-        },
-      });
-
-      tl.fromTo(
-        headingRef.current,
-        { opacity: 0, y: 20 },
-        { opacity: 1, y: 0, ease: "none", duration: 0.3 },
-      ).fromTo(
-        bubbleRefs.current,
-        { opacity: 0, scale: 0.5 },
-        {
-          opacity: 1,
-          scale: 1,
-          ease: "none",
-          stagger: { each: 0.15, from: "random" },
-          duration: 0.7,
-        },
-        0.3,
-      );
-
-      const pinST = tl.scrollTrigger!;
-
-      requestAnimationFrame(() => {
-        const containerRect = containerRef.current!.getBoundingClientRect();
-        const bubbles = bubbleRefs.current.filter(Boolean) as HTMLDivElement[];
-        const overflowPastSection = 20;
-
-        bubbles.forEach((bubble) => {
-          const bubbleRect = bubble.getBoundingClientRect();
-          const bubbleBottomRelativeToContainer =
-            bubbleRect.bottom - containerRect.top;
-
-          const distance =
-            containerRect.height -
-            bubbleBottomRelativeToContainer +
-            overflowPastSection;
-
-          gsap.fromTo(
-            bubble,
-            { y: 0 },
-            {
-              y: distance,
-              ease: "none",
-              scrollTrigger: {
-                trigger: containerRef.current,
-                start: () => pinST.end,
-                end: () => pinST.end + window.innerHeight * 1,
-                scrub: true,
-              },
+        gsap.fromTo(
+          logoRef.current,
+          { yPercent: -100 },
+          {
+            yPercent: 0,
+            ease: "none",
+            scrollTrigger: {
+              trigger: "#hero-section",
+              endTrigger: containerRef.current,
+              start: "top top",
+              end: "bottom bottom",
+              scrub: true,
             },
-          );
+          },
+        );
+
+        const tl = gsap.timeline({
+          scrollTrigger: {
+            trigger: containerRef.current,
+            start: "top top",
+            end: "+=150%",
+            pin: true,
+            scrub: true,
+            anticipatePin: 1,
+          },
+        });
+
+        tl.fromTo(
+          headingRef.current,
+          { opacity: 0, y: 20 },
+          { opacity: 1, y: 0, ease: "none", duration: 0.3 },
+        ).fromTo(
+          bubbleRefs.current,
+          { opacity: 0, scale: 0.5 },
+          {
+            opacity: 1,
+            scale: 1,
+            ease: "none",
+            stagger: { each: 0.15, from: "random" },
+            duration: 0.7,
+          },
+          0.3,
+        );
+
+        const pinST = tl.scrollTrigger!;
+
+        requestAnimationFrame(() => {
+          const containerRect = containerRef.current!.getBoundingClientRect();
+          const bubbles = bubbleRefs.current.filter(
+            Boolean,
+          ) as HTMLDivElement[];
+          const overflowPastSection = 20;
+
+          bubbles.forEach((bubble) => {
+            const bubbleRect = bubble.getBoundingClientRect();
+            const bubbleBottomRelativeToContainer =
+              bubbleRect.bottom - containerRect.top;
+
+            const distance =
+              containerRect.height -
+              bubbleBottomRelativeToContainer +
+              overflowPastSection;
+
+            gsap.fromTo(
+              bubble,
+              { y: 0 },
+              {
+                y: distance,
+                ease: "none",
+                scrollTrigger: {
+                  trigger: containerRef.current,
+                  start: () => pinST.end,
+                  end: () => pinST.end + window.innerHeight * 1,
+                  scrub: true,
+                },
+              },
+            );
+          });
         });
       });
+      return () => mm.revert();
     },
     { scope: containerRef },
   );
@@ -130,20 +139,20 @@ const GlobalLeaders = () => {
         className="absolute inset-0 -z-10"
       />
 
-      <h2 ref={headingRef} className="text-2xl text-white opacity-0">
+      <h2 ref={headingRef} className="text-2xl text-white lg:opacity-0">
         Trusted by Global Leaders
       </h2>
 
       <div className="container">
         <div className="flex items-center justify-between">
-          <div className="flex flex-col gap-8">
+          <div className="flex flex-col gap-8 lg:ml-0 ml-10">
             {logos.slice(0, 4).map((logo, i) => (
               <div
                 key={logo.alt}
                 ref={(el) => {
                   bubbleRefs.current[i] = el;
                 }}
-                className={` rounded-full bg-white flex justify-center items-center opacity-0 p-3.5 nth-2:ml-[100px] last:ml-[250px] `}
+                className={` rounded-full bg-white flex justify-center items-center lg:opacity-0 p-3.5 nth-2:ml-[100px] last:ml-[250px] `}
                 style={{
                   width: `${logo.width + 16}px`,
                   height: `${logo.width + 16}px`,
@@ -172,14 +181,14 @@ const GlobalLeaders = () => {
             />
           </div>
 
-          <div className="flex flex-col gap-8">
+          <div className="flex flex-col gap-8 lg:mr-0 mr-10">
             {logos.slice(4).map((logo, i) => (
               <div
                 key={logo.alt}
                 ref={(el) => {
                   bubbleRefs.current[i + 4] = el;
                 }}
-                className="w-24 h-24 rounded-full bg-white flex justify-center items-center opacity-0 p-3.5 ml-auto nth-2:mr-[100px]"
+                className="w-24 h-24 rounded-full bg-white flex justify-center items-center lg:opacity-0 p-3.5 ml-auto nth-2:mr-[100px]"
                 style={{
                   width: `${logo.width + 16}px`,
                   height: `${logo.width + 16}px`,

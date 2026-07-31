@@ -38,7 +38,7 @@ const Hero = () => {
     <section
       id="hero-section"
       ref={containerRef}
-      className="relative min-h-screen flex justify-center items-center overflow-hidden "
+      className="relative min-h-screen flex justify-center items-center overflow-hidden py-10"
     >
       <DotGridBackground
         density={1}
@@ -47,7 +47,7 @@ const Hero = () => {
       />
       <div className="container">
         <div className="grid lg:grid-cols-3 items-center">
-          <h1 className="lg:text-3xl text-2xl font-regular">
+          <h1 className="sm:text-3xl text-2xl lg:text-left text-center font-regular">
             Moving your brand forward, faster.
           </h1>
           <div ref={logoRef} className="flex justify-center items-center">
