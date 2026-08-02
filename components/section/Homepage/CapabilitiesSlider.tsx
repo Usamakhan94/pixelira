@@ -5,7 +5,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import type { Swiper as SwiperType } from "swiper/types";
 import "swiper/css";
 import type Lenis from "lenis";
-
+import { Autoplay, Mousewheel } from "swiper/modules";
 import Image from "next/image";
 import AnimatedButton from "@/components/ui/button/AnimatedButton";
 import AnimatedArrowIcon from "@/components/ui/button/AnimatedArrowIcon";
@@ -90,6 +90,7 @@ function getSlideTransform(delta: number) {
 export default function CapabilitiesSlider() {
   const wrapperRef = useRef<HTMLDivElement>(null);
   const swiperRef = useRef<SwiperType | null>(null);
+  const mobileSwiperRef = useRef<SwiperType | null>(null);
   const scrollStopTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
   const [continuousIndex, setContinuousIndex] = useState(0);
 
@@ -155,84 +156,180 @@ export default function CapabilitiesSlider() {
   }, []);
 
   return (
-    <div
-      ref={wrapperRef}
-      className="relative "
-      style={{ height: `${SCROLL_LENGTH_VH}vh` }}
-    >
-      <div className="sticky top-0 h-screen w-full overflow-hidden">
-        <Swiper
-          direction="horizontal"
-          slidesPerView={1}
-          speed={0}
-          allowTouchMove={false}
-          simulateTouch={false}
-          onSwiper={(s) => (swiperRef.current = s)}
-          className="capabilities-swiper h-full w-full"
-        >
-          {capabilities.map((item, index) => {
-            const delta = index - continuousIndex;
+    <>
+      <div
+        ref={wrapperRef}
+        className="relative lg:block hidden mt-10"
+        style={{ height: `${SCROLL_LENGTH_VH}vh` }}
+      >
+        <div className="sticky top-0 h-screen w-full overflow-hidden">
+          <Swiper
+            direction="horizontal"
+            slidesPerView={1}
+            speed={0}
+            allowTouchMove={false}
+            simulateTouch={false}
+            onSwiper={(s) => (swiperRef.current = s)}
+            className="capabilities-swiper h-full w-full"
+          >
+            {capabilities.map((item, index) => {
+              const delta = index - continuousIndex;
 
-            return (
-              <SwiperSlide
-                key={item.title}
-                style={{
-                  position: "absolute",
-                  inset: 0,
-                  width: "100%",
-                  height: "100%",
-                  transform: getSlideTransform(delta),
-                }}
-                className="flex! items-center justify-center overflow-hidden"
-              >
-                <div className="flex flex-col gap-8.5 max-w-300 w-full items-center bg-white p-5 rounded-[1rem] ">
-                  <div className="relative w-full h-full rounded-[1rem] overflow-hidden">
-                    <Image
-                      src={item.image}
-                      alt={item.title}
-                      width={1200}
-                      height={480}
-                      className="h-full w-full object-cover"
-                    />
-                  </div>
-                  <div className="flex justify-between w-full">
-                    <div className="flex flex-col gap-6.25 max-w-110.5">
-                      <h3 className="text-4xl leading-none">{item.title}</h3>
-                      <p className="text-body font-light leading-tight">
-                        {item.description}
-                      </p>
+              return (
+                <SwiperSlide
+                  key={item.title}
+                  style={{
+                    position: "absolute",
+                    inset: 0,
+                    width: "100%",
+                    height: "100%",
+                    transform: getSlideTransform(delta),
+                  }}
+                  className="flex! items-center justify-center overflow-hidden"
+                >
+                  <div className="flex flex-col gap-8.5 max-w-300 w-full lg:h-fit h-full items-center bg-white p-5 rounded-[1rem] ">
+                    <div className="relative w-full flex-1 min-h-0 max-h-[45vh] lg:max-h-[50vh] rounded-[1rem] overflow-hidden">
+                      <Image
+                        src={item.image}
+                        alt={item.title}
+                        width={1200}
+                        height={480}
+                        className="h-full w-full object-cover"
+                      />
                     </div>
-                    <div className=" flex flex-col items-end gap-7">
-                      <AnimatedButton
-                        href="#"
-                        trailingContent={<AnimatedArrowIcon />}
-                      >
-                        Case Studies
-                      </AnimatedButton>
-                      <ul className="flex justify-center items-center p-5 border border-black/10 rounded-[0.625rem]">
-                        {item.links.map((link) => (
-                          <li
-                            className="relative px-2.75 first:pl-0 last:pr-0 leading-none border-r last:border-0"
-                            key={link}
-                          >
-                            {link}
-                          </li>
-                        ))}
-                      </ul>
+                    <div className="flex justify-between w-full shrink-0">
+                      <div className="flex flex-col gap-6.25 max-w-110.5">
+                        <h3 className="text-4xl leading-none">{item.title}</h3>
+                        <p className="text-body font-light leading-tight">
+                          {item.description}
+                        </p>
+                      </div>
+                      <div className=" flex flex-col items-end gap-7">
+                        <AnimatedButton
+                          href="#"
+                          trailingContent={<AnimatedArrowIcon />}
+                        >
+                          Case Studies
+                        </AnimatedButton>
+                        <ul className="flex justify-center items-center p-5 border border-black/10 rounded-[0.625rem]">
+                          {item.links.map((link) => (
+                            <li
+                              className="relative px-2.75 first:pl-0 last:pr-0 leading-none border-r last:border-0"
+                              key={link}
+                            >
+                              {link}
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
                     </div>
                   </div>
-                </div>
-              </SwiperSlide>
-            );
-          })}
-        </Swiper>
+                </SwiperSlide>
+              );
+            })}
+          </Swiper>
 
-        <style jsx global>{`
-          .capabilities-swiper .swiper-wrapper {
-            transform: none !important;
-          }
-        `}</style>
+          <style jsx global>{`
+            .capabilities-swiper .swiper-wrapper {
+              transform: none !important;
+            }
+          `}</style>
+        </div>
       </div>
-    </div>
+      <div className="relative mt-10 lg:hidden block">
+        <div className=" h-screen w-full overflow-hidden">
+          <div className="flex gap-2 absolute top-10 left-10 z-10">
+            <button
+              className="rotate-180 cursor-pointer"
+              onClick={(e) => {
+                e.stopPropagation();
+                mobileSwiperRef.current?.slidePrev();
+              }}
+            >
+              <AnimatedArrowIcon
+                className="group hover:bg-white bg-black size-10!"
+                bgColor="black"
+              />
+            </button>
+            <button
+              className=" cursor-pointer"
+              onClick={(e) => {
+                e.stopPropagation();
+                mobileSwiperRef.current?.slideNext();
+              }}
+            >
+              <AnimatedArrowIcon
+                className="group hover:bg-white bg-black size-10!"
+                bgColor="black"
+              />
+            </button>
+          </div>
+          <Swiper
+            onSwiper={(s) => (mobileSwiperRef.current = s)}
+            direction="horizontal"
+            loop
+            slidesPerView={1}
+            speed={3000}
+            modules={[Autoplay, Mousewheel]}
+            mousewheel={{ forceToAxis: true }}
+            autoplay={{ delay: 3000, disableOnInteraction: false }}
+            className="h-full w-full"
+          >
+            {capabilities.map((item, index) => {
+              return (
+                <SwiperSlide
+                  key={item.title}
+                  style={{
+                    width: "100%",
+                    height: "100%",
+                  }}
+                  className="flex! items-center justify-center overflow-hidden"
+                >
+                  <div className="flex flex-col gap-8.5 max-w-300 w-full h-full items-center bg-white p-5 ">
+                    <div className="relative w-full h-full overflow-hidden">
+                      <Image
+                        src={item.image}
+                        alt={item.title}
+                        width={900}
+                        height={320}
+                        className="h-full w-full object-cover"
+                      />
+                    </div>
+                    <div className="flex justify-between w-full">
+                      <div className="flex flex-col gap-6.25 max-w-110.5">
+                        <h3 className=" lg:text-4xl text-2xl leading-none">
+                          {item.title}
+                        </h3>
+                        <p className="text-body font-light leading-tight">
+                          {item.description}
+                        </p>
+                      </div>
+                      <div className=" flex flex-col items-end gap-7">
+                        <AnimatedButton
+                          href="#"
+                          trailingContent={<AnimatedArrowIcon />}
+                        >
+                          Case Studies
+                        </AnimatedButton>
+                        <ul className="flex justify-center items-center lg:p-5 p-3 border border-black/10 rounded-[0.625rem]">
+                          {item.links.map((link) => (
+                            <li
+                              className="relative lg:px-2.75 px-2 first:pl-0 last:pr-0 leading-none border-r last:border-0"
+                              key={link}
+                            >
+                              {link}
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                </SwiperSlide>
+              );
+            })}
+          </Swiper>
+        </div>
+      </div>
+    </>
   );
 }

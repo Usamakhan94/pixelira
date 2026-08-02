@@ -131,7 +131,7 @@ const GlobalLeaders = () => {
     <section
       ref={containerRef}
       id="global-leaders"
-      className="relative isolate min-h-screen flex flex-col justify-center items-center gap-20 bg-primary overflow-hidden"
+      className="relative isolate min-h-screen flex flex-col justify-center items-center gap-20 bg-primary overflow-hidden lg:py-0 py-10"
     >
       <DotGridBackground
         density={1}

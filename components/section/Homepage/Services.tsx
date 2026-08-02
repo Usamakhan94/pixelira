@@ -35,7 +35,7 @@ const Services = () => {
   ];
 
   return (
-    <section className="py-37.5">
+    <section className="lg:py-37.5 py-20">
       <div className="container">
         <div className="flex flex-col">
           {servicesList.map((cardDetails, index) => (

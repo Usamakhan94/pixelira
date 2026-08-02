@@ -84,15 +84,15 @@ const ServicesCards = ({
       onMouseEnter={() => mouseEnterHandler()}
       onMouseLeave={() => mouseLeaveHandler()}
       onMouseMove={(e) => mouseMoveHandler(e)}
-      className={` py-14.75 relative before:absolute before:bottom-0 before:w-full before:h-px before:bg-black/10 hover:before:bg-primary before:-z-10 perspective-near last:before:hidden group`}
+      className={` lg:py-14.75 py-8 relative before:absolute before:bottom-0 before:w-full before:h-px before:bg-black/10 hover:before:bg-primary before:-z-10 perspective-near last:before:hidden group`}
     >
       <h3
-        className={`text-4xl group-hover:text-primary ${(i + 1) % 2 == 0 ? "text-right" : "text-left"}`}
+        className={`text-4xl group-hover:text-primary ${(i + 1) % 2 == 0 ? "lg:text-right text-center" : "lg:text-left text-center"}`}
       >
         {title}
       </h3>
       <Image
-        className="pointer-events-none w-full h-full object-cover rounded-[10px] overflow-hidden max-w-60.75 min-h-80 absolute left-1/2 -top-1/2 -translate-x-1/2 translate-y-1/2"
+        className="lg:inline-block hidden pointer-events-none w-full h-full object-cover rounded-[10px] overflow-hidden max-w-60.75 min-h-80 absolute lg:left-1/2 left-full -top-1/2 -translate-x-1/2 translate-y-1/2"
         ref={image}
         src={imgUrl}
         alt={title}

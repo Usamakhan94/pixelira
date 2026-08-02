@@ -43,10 +43,10 @@ const ProvenGrowth = () => {
         </p>
       </div>
       <div className="container">
-        <div className="grid grid-cols-3 gap-4 mb-7.5">
+        <div className="grid lg:grid-cols-3 gap-4 lg:mb-7.5 mb-4">
           {process.map((item, index) => (
             <div key={index + 1} className=" p-10 bg-card rounded-[24px]">
-              <div className="flex items-center justify-center w-13 h-13 p-3.5 rounded-[16px] bg-[rgba(191,182,164,0.07)] opacity-80 mb-24.75">
+              <div className="flex items-center justify-center w-13 h-13 p-3.5 rounded-[16px] bg-[rgba(191,182,164,0.07)] opacity-80 lg:mb-24.75 mb-10">
                 <item.icon className="text-white w-full h-full" />
               </div>
               <div>
@@ -62,7 +62,7 @@ const ProvenGrowth = () => {
         </div>
         <div className=" p-10 bg-linear-to-t from-[#50338C] to-[#8B59F2] rounded-[24px] flex items-stretch gap-17.5 ">
           <div className="flex-1 flex flex-col justify-between">
-            <div className="flex items-center justify-center w-13 h-13 p-3.5 rounded-[16px] bg-white mb-24.75">
+            <div className="flex items-center justify-center w-13 h-13 p-3.5 rounded-[16px] bg-white lg:mb-24.75 mb-10">
               <FaArrowTrendUp className="text-primary w-full h-full" />
             </div>
             <div>
@@ -74,14 +74,14 @@ const ProvenGrowth = () => {
                 results, higher ROI, and long-term growth.
               </p>
               <AnimatedButton
-                className="mt-14.75"
+                className="lg:mt-14.75 mt-4"
                 trailingContent={<AnimatedArrowIcon />}
               >
                 Book an Appointment
               </AnimatedButton>
             </div>
           </div>
-          <div className="rounded-[10px] overflow-hidden min-w-88.75">
+          <div className="lg:flex hidden rounded-[10px] overflow-hidden min-w-88.75">
             <Image
               className="w-full h-full object-cover"
               src={"/make-call.gif"}
