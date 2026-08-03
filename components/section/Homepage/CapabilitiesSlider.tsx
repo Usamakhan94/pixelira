@@ -237,7 +237,7 @@ export default function CapabilitiesSlider() {
         </div>
       </div>
       <div className="relative mt-10 lg:hidden block">
-        <div className=" h-screen w-full overflow-hidden">
+        <div className=" md:min-h-screen w-full overflow-hidden">
           <div className="flex gap-2 absolute top-10 left-10 z-10">
             <button
               className="rotate-180 cursor-pointer"
@@ -292,29 +292,29 @@ export default function CapabilitiesSlider() {
                         alt={item.title}
                         width={900}
                         height={320}
-                        className="h-full w-full object-cover"
+                        className="h-full w-full object-cover object-center"
                       />
                     </div>
-                    <div className="flex justify-between w-full">
-                      <div className="flex flex-col gap-6.25 max-w-110.5">
-                        <h3 className=" lg:text-4xl text-2xl leading-none">
+                    <div className="flex justify-between flex-col md:gap-0 gap-6 w-full">
+                      <div className="flex flex-col gap-6.25 max-w-150">
+                        <h3 className=" lg:text-4xl sm:text-2xl text-xl leading-none">
                           {item.title}
                         </h3>
-                        <p className="text-body font-light leading-tight">
+                        <p className="sm:text-body text-sm   font-light leading-tight">
                           {item.description}
                         </p>
                       </div>
-                      <div className=" flex flex-col items-end gap-7">
+                      <div className=" flex flex-col sm:items-end items-start gap-7">
                         <AnimatedButton
                           href="#"
                           trailingContent={<AnimatedArrowIcon />}
                         >
                           Case Studies
                         </AnimatedButton>
-                        <ul className="flex justify-center items-center lg:p-5 p-3 border border-black/10 rounded-[0.625rem]">
+                        <ul className="flex justify-center sm:flex-row flex-col sm:items-center items-start lg:p-5 sm:p-3 border border-black/10 rounded-[0.625rem] sm:w-fit w-full">
                           {item.links.map((link) => (
                             <li
-                              className="relative lg:px-2.75 px-2 first:pl-0 last:pr-0 leading-none border-r last:border-0"
+                              className="relative lg:px-2.75 sm:px-2 sm:first:pl-0 sm:last:pr-0 p-2.5 leading-none sm:border-r sm:last:border-0 sm:w-fit w-full sm:border-b-0 border-b last:border-b-0 "
                               key={link}
                             >
                               {link}

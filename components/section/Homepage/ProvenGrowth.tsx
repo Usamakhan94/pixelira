@@ -30,8 +30,8 @@ const ProvenGrowth = () => {
 
   return (
     <section className="">
-      <div className="mb-20 max-w-120 text-center mx-auto">
-        <h2 className=" text-4xl text-center mb-4">
+      <div className="sm:mb-20 mb-8 max-w-120 text-center mx-auto px-4">
+        <h2 className=" sm:text-4xl text-2xl text-center sm:mb-4 mb-2">
           Our proven{"  "}
           <span className="text-primary xl:block">
             <i>growth</i> process
@@ -70,8 +70,9 @@ const ProvenGrowth = () => {
                 Scale{" "}
               </h3>
               <p className="text-white text-body leading-tight ">
-                We invest more into what’s working to drive <br /> stronger
-                results, higher ROI, and long-term growth.
+                We invest more into what’s working to drive{" "}
+                <br className="sm:block hidden" /> stronger results, higher ROI,
+                and long-term growth.
               </p>
               <AnimatedButton
                 className="lg:mt-14.75 mt-4"

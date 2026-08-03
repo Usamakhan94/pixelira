@@ -139,20 +139,23 @@ const GlobalLeaders = () => {
         className="absolute inset-0 -z-10"
       />
 
-      <h2 ref={headingRef} className="text-2xl text-white lg:opacity-0">
+      <h2
+        ref={headingRef}
+        className="text-2xl text-white text-center lg:opacity-0"
+      >
         Trusted by Global Leaders
       </h2>
 
       <div className="container">
         <div className="flex items-center justify-between">
-          <div className="flex flex-col gap-8 lg:ml-0 ml-10">
+          <div className="flex flex-col gap-8 lg:ml-0 md:ml-10 ml-0">
             {logos.slice(0, 4).map((logo, i) => (
               <div
                 key={logo.alt}
                 ref={(el) => {
                   bubbleRefs.current[i] = el;
                 }}
-                className={` rounded-full bg-white flex justify-center items-center lg:opacity-0 p-3.5 nth-2:ml-[100px] last:ml-[250px] `}
+                className={` rounded-full bg-white flex justify-center items-center lg:opacity-0 p-3.5 sm:nth-2:ml-[100px] nth-2:ml-[70px] sm:last:ml-[250px] last:ml-[50px] `}
                 style={{
                   width: `${logo.width + 16}px`,
                   height: `${logo.width + 16}px`,
@@ -188,7 +191,7 @@ const GlobalLeaders = () => {
                 ref={(el) => {
                   bubbleRefs.current[i + 4] = el;
                 }}
-                className="w-24 h-24 rounded-full bg-white flex justify-center items-center lg:opacity-0 p-3.5 ml-auto nth-2:mr-[100px]"
+                className="w-24 h-24 rounded-full bg-white flex justify-center items-center lg:opacity-0 p-3.5 ml-auto sm:nth-2:mr-[100px] nth-2:mr-[30px]"
                 style={{
                   width: `${logo.width + 16}px`,
                   height: `${logo.width + 16}px`,

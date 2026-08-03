@@ -1,5 +1,5 @@
 "use client";
-import { useState, useRef, useCallback } from "react";
+import { useState, useRef, useCallback, useEffect } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import type { Swiper as SwiperType } from "swiper/types";
 import Image from "next/image";
@@ -62,6 +62,9 @@ const TestimonialsSection = () => {
   const lastClientPos = useRef({ x: 0, y: 0 });
   const [hoverZone, setHoverZone] = useState<"top" | "bottom" | null>(null);
   const [cursorPos, setCursorPos] = useState({ x: 0, y: 0 });
+  const mobileSwiperRef = useRef<SwiperType | null>(null);
+  const desktopSwiperRef = useRef<SwiperType | null>(null);
+  const [isDesktop, setIsDesktop] = useState(false);
 
   const evaluateHover = useCallback((clientX: number, clientY: number) => {
     const wrapperRect = wrapperRef.current?.getBoundingClientRect();
@@ -105,18 +108,71 @@ const TestimonialsSection = () => {
     setHoverZone(null);
   }
 
+  useEffect(() => {
+    const mq = window.matchMedia("(min-width: 1280px)"); // your xl breakpoint
+    const update = () => setIsDesktop(mq.matches);
+    update();
+    mq.addEventListener("change", update);
+    return () => mq.removeEventListener("change", update);
+  }, []);
+
+  const activeSwiper = () =>
+    isDesktop ? desktopSwiperRef.current : mobileSwiperRef.current;
+
   return (
-    <section className="bg-primary flex items-center justify-between">
-      <div className="p-6 max-w-110 flex flex-col gap-10">
-        <h3 className="text-3xl font-medium text-left leading-none">
+    <section className="bg-primary flex items-center justify-between xl:p-0 py-10 ">
+      <div className="xl:p-6 xl:max-w-110 w-full flex flex-col gap-10">
+        <h3 className="sm:text-3xl text-2xl font-medium xl:text-left text-center leading-none">
           What our partners say
         </h3>
-        <div className="flex gap-2">
+        <div className="relative xl:hidden block">
+          <Swiper
+            onSwiper={(s) => (mobileSwiperRef.current = s)}
+            direction="horizontal"
+            slidesPerView="auto"
+            className="testimonials-swiper h-full w-full mr-0!"
+            loop
+            centeredSlides
+            spaceBetween={0}
+            speed={900}
+            modules={[Autoplay]}
+          >
+            {testimonials.map((item) => (
+              <SwiperSlide
+                key={item.id}
+                className="relative flex! items-center justify-center"
+              >
+                <div className="relative w-full h-full rounded-full overflow-hidden sm:px-0 px-10">
+                  <Image
+                    src={item.image}
+                    alt={item.company}
+                    fill
+                    className="object-cover"
+                  />
+                  <div className="absolute inset-0 bg-black/50" />
+
+                  <div className="relative z-10 flex flex-col items-center justify-center h-full px-12 text-center text-white">
+                    <div className=" text-white mb-6">
+                      <span className="font-bold text-sm">{item.company}</span>
+                    </div>
+                    <p className="text-lg font-medium leading-snug max-w-md">
+                      “{item.quote}”
+                    </p>
+                    {/* <span className="mt-4 text-xs tracking-wide text-white/70">
+                    {item.author}
+                  </span> */}
+                  </div>
+                </div>
+              </SwiperSlide>
+            ))}
+          </Swiper>
+        </div>
+        <div className="flex gap-2 self-center xl:self-start">
           <button
             className="rotate-180 cursor-pointer"
             onClick={(e) => {
               e.stopPropagation();
-              swiperRef.current?.slidePrev();
+              activeSwiper()?.slidePrev();
             }}
           >
             <AnimatedArrowIcon
@@ -128,7 +184,7 @@ const TestimonialsSection = () => {
             className=" cursor-pointer"
             onClick={(e) => {
               e.stopPropagation();
-              swiperRef.current?.slideNext();
+              activeSwiper()?.slideNext();
             }}
           >
             <AnimatedArrowIcon
@@ -142,10 +198,10 @@ const TestimonialsSection = () => {
         ref={wrapperRef}
         onMouseMove={handleMouseMove}
         onMouseLeave={handleMouseLeave}
-        className="relative max-h-screen h-screen"
+        className="relative max-h-screen h-screen xl:block hidden"
       >
         <Swiper
-          onSwiper={(s) => (swiperRef.current = s)}
+          onSwiper={(s) => (desktopSwiperRef.current = s)}
           onSlideChangeTransitionEnd={() => {
             evaluateHover(lastClientPos.current.x, lastClientPos.current.y);
           }}
@@ -192,7 +248,7 @@ const TestimonialsSection = () => {
         <button
           onClick={(e) => {
             e.stopPropagation();
-            swiperRef.current?.slidePrev();
+            desktopSwiperRef.current?.slidePrev();
           }}
           style={{ top: cursorPos.y, left: cursorPos.x }}
           className={`flex justify-center items-center gap-1 cursor-none absolute -translate-x-1/2 -translate-y-1/2 z-20 rounded-full bg-white text-black w-28.5 h-28.5 text-sm font-semibold origin-center transition-transform duration-300 ${
@@ -211,7 +267,7 @@ const TestimonialsSection = () => {
         <button
           onClick={(e) => {
             e.stopPropagation();
-            swiperRef.current?.slideNext();
+            desktopSwiperRef.current?.slideNext();
           }}
           style={{ top: cursorPos.y, left: cursorPos.x }}
           className={`flex justify-center items-center gap-1 cursor-none absolute -translate-x-1/2 -translate-y-1/2 z-20 rounded-full bg-white text-black w-28.5 h-28.5 text-sm font-semibold origin-center transition-transform duration-300 ${

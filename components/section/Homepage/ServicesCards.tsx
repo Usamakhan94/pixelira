@@ -84,10 +84,10 @@ const ServicesCards = ({
       onMouseEnter={() => mouseEnterHandler()}
       onMouseLeave={() => mouseLeaveHandler()}
       onMouseMove={(e) => mouseMoveHandler(e)}
-      className={` lg:py-14.75 py-8 relative before:absolute before:bottom-0 before:w-full before:h-px before:bg-black/10 hover:before:bg-primary before:-z-10 perspective-near last:before:hidden group`}
+      className={` lg:py-14.75 sm:py-8 py-4 relative before:absolute before:bottom-0 before:w-full before:h-px before:bg-black/10 hover:before:bg-primary before:-z-10 perspective-near last:before:hidden group`}
     >
       <h3
-        className={`text-4xl group-hover:text-primary ${(i + 1) % 2 == 0 ? "lg:text-right text-center" : "lg:text-left text-center"}`}
+        className={`md:text-4xl text-2xl group-hover:text-primary ${(i + 1) % 2 == 0 ? "lg:text-right text-center" : "lg:text-left text-center"}`}
       >
         {title}
       </h3>
