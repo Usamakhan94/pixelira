@@ -57,7 +57,6 @@ const testimonials = [
 ];
 
 const TestimonialsSection = () => {
-  const swiperRef = useRef<SwiperType | null>(null);
   const wrapperRef = useRef<HTMLDivElement | null>(null);
   const lastClientPos = useRef({ x: 0, y: 0 });
   const [hoverZone, setHoverZone] = useState<"top" | "bottom" | null>(null);
@@ -75,7 +74,7 @@ const TestimonialsSection = () => {
       y: clientY - wrapperRect.top,
     });
 
-    const swiper = swiperRef.current;
+    const swiper = desktopSwiperRef.current;
     const activeSlideEl = swiper?.slides[swiper.activeIndex] as
       | HTMLElement
       | undefined;
@@ -109,7 +108,7 @@ const TestimonialsSection = () => {
   }
 
   useEffect(() => {
-    const mq = window.matchMedia("(min-width: 1280px)"); // your xl breakpoint
+    const mq = window.matchMedia("(min-width: 1280px)");
     const update = () => setIsDesktop(mq.matches);
     update();
     mq.addEventListener("change", update);
