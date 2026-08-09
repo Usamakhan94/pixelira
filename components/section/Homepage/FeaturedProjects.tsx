@@ -1,4 +1,5 @@
 import CapabilitiesSlider from "./CapabilitiesSlider";
+import StackingCapabilitiesSlider from "./CapabilitiesSliderRevamped";
 
 const FeaturedProjects = () => {
   return (
@@ -9,7 +10,8 @@ const FeaturedProjects = () => {
           <i>Featured</i> Projects
         </span>
       </h2>
-      <CapabilitiesSlider />
+      <StackingCapabilitiesSlider />
+      {/* <CapabilitiesSlider /> */}
     </section>
   );
 };
