@@ -57,14 +57,14 @@ const IndustryAbout = () => {
       <div className="mt-20">
         <Accordion defaultValue={["item-1"]}>
           <AccordionItem value="item-1">
-            <AccordionTrigger className="text-xl font-normal [&_svg]:hidden! underline-0! bg-primary text-white py-6.25">
+            <AccordionTrigger className="text-xl font-normal [&_svg]:hidden! underline-0! bg-primary text-white py-6.25 rounded-none!">
               <span className="max-w-360 w-full mx-auto flex items-center gap-14.75">
                 <span>01</span>
                 Brand Strategy
               </span>
             </AccordionTrigger>
             <AccordionContent>
-              <div className="max-w-360 mx-auto">
+              <div className="max-w-360 mx-auto pl-23.75">
                 Yes. It adheres to the WAI-ARIA design pattern.
               </div>
             </AccordionContent>
